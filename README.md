@@ -1,3 +1,4 @@
-En esta tarea, trabajamos con react para actualizar nuestra tarea original, se debían de agregar un carrusel y debe de ser responsivo, la hice basado en un una tienda de piezas de tuning para autos JDM, basando las paginas en temas como suspesiones, aros y registro de usuarios.
+Este proyecto es la mejora de la tienda de piezas JDM desarrollada originalmente. En esta fase, se agregó una arquitectura de gestión de estado global para sincronizar la interfaz en tiempo real y simular un flujo completo de autenticación de usuarios, manteniendo un diseño responsivo.
+Se seleccionó la Opción A (Context API + useReducer) porque permite trabajar de forma nativa y eficiente la complejidad del estado de sesión en toda la aplicación.
 Desarrollado por: José Eduardo Salguero Aquino - Carné: 9490-19-456
-Link Netlify https://lighthearted-fairy-37b310.netlify.app
+Link Netlify https://tarea3dw.netlify.app/
