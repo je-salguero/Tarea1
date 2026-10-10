@@ -20,7 +20,7 @@ function Carrito() {
     try {
       const nombresPedidos = carrito.map(item => item.nombre);
 
-      const respuesta = await fetch('http://localhost:5000/api/usuarios/pedidos', {
+      const respuesta = await fetch('https://tarea1-ytwb.onrender.com/api/usuarios/pedidos', {
         method: 'PUT', 
         headers: {
           'Content-Type': 'application/json',

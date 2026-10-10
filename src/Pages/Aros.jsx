@@ -11,7 +11,7 @@ function Aros() {
   useEffect(() => {
     const obtenerCatalogo = async () => {
       try {
-        const respuesta = await fetch('http://localhost:5000/api/piezas');
+        const respuesta = await fetch('https://tarea1-ytwb.onrender.com/api/piezas');
         
         if (!respuesta.ok) {
           throw new Error('Error al conectar con el servidor');

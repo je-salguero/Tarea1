@@ -30,11 +30,11 @@ function AgregarPieza() {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const respuesta = await fetch('http://localhost:5000/api/piezas', {
+      const respuesta = await fetch('https://tarea1-ytwb.onrender.com/api/piezas', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-auth-token': token // Enviamos tu token de admin
+          'x-auth-token': token 
         },
         body: JSON.stringify(pieza)
       });
