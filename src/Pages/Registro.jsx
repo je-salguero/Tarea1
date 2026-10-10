@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Form, Button, Container, Row, Col, Card, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
 
 function Registro() {
   const [nombre, setNombre] = useState('');
