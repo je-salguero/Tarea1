@@ -1,0 +1,138 @@
+{
+  "info": {
+    "name": "Tarea5 - JWT JDM Store",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "1) Ejecutar Login. 2) Ejecutar la petición con token válido. 3) Esperar 5 minutos y ejecutar la última: debe responder 401 token_expired."
+  },
+  "item": [
+    {
+      "name": "1. Login (obtiene el token)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "login"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"correo\": \"CAMBIAR@correo.com\",\n  \"password\": \"CAMBIAR\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Login 200 y trae token', function () {",
+              "  pm.response.to.have.status(200);",
+              "  var datos = pm.response.json();",
+              "  pm.expect(datos.token).to.be.a('string');",
+              "  pm.collectionVariables.set('token', datos.token);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Petición protegida con Bearer Token válido",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/piezas",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "piezas"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('200 con token válido', function () {",
+              "  pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Misma petición tras esperar 5 minutos (401 token_expired)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/piezas",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "piezas"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('401 token_expired después de 5 minutos', function () {",
+              "  pm.response.to.have.status(401);",
+              "  pm.expect(pm.response.json().error).to.eql('token_expired');",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://tarea1-ytwb.onrender.com/api"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}
